@@ -2,6 +2,12 @@ Yii2 Campus Pay Extension
 =========================
 Yii2 Campus Pay Extension
 
+Requirements
+------------
+
+- PHP 7.4 or later, including PHP 8.5
+- Yii 2.0.45 or later
+
 Installation
 ------------
 

@@ -14,11 +14,11 @@
     }
   ],
   "require": {
-    "yiisoft/yii2": "*"
+    "yiisoft/yii2": "^2.0.45"
   },
   "autoload": {
     "psr-4": {
-      "srun\\campay\\": "/src"
+      "srun\\campay\\": "src/"
     }
   }
 }

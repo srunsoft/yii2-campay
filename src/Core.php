@@ -147,11 +147,6 @@ class Core
             $arg .= $firstCh . $value;
         }
 
-        // 如果存在转义字符，那么去掉转义
-        if (get_magic_quotes_gpc()) {
-            $arg = stripslashes($arg);
-        }
-
         return $arg;
     }
 
@@ -163,15 +158,12 @@ class Core
     public function createLinkstringUrlencode($para)
     {
         $arg = "";
-        while (list ($key, $val) = each($para)) {
+        foreach ($para as $key => $val) {
             $arg .= $key . "=" . urlencode($val) . "&";
         }
         // 去掉最后一个&字符
-        $arg = substr($arg, 0, count($arg) - 2);
-
-        // 如果存在转义字符，那么去掉转义
-        if (get_magic_quotes_gpc()) {
-            $arg = stripslashes($arg);
+        if ($arg !== "") {
+            $arg = substr($arg, 0, -1);
         }
 
         return $arg;
@@ -185,7 +177,7 @@ class Core
     public function paraFilter($para)
     {
         $para_filter = [];
-        while (list ($key, $val) = each($para)) {
+        foreach ($para as $key => $val) {
             if ($key == "sign" || $key == "sign_type" || $val == "")
                 continue;
             else
@@ -239,7 +231,7 @@ class Core
         $vendorDir = Yii::getAlias($path);
         $fp = fopen($vendorDir . 'campay' . date('Y-m-d') . ".log", "a");
         flock($fp, LOCK_EX);
-        fwrite($fp, "执行日期：" . strftime("%Y%m%d%H%M%S", time()) . "\n" . $word . "\n");
+        fwrite($fp, "执行日期：" . date("YmdHis") . "\n" . $word . "\n");
         flock($fp, LOCK_UN);
         fclose($fp);
     }
